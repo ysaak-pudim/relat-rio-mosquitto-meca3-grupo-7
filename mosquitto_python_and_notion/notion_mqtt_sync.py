@@ -131,7 +131,7 @@ def update_db_thread():
             
         old_dict = dict(temporary_dict)
 
-# It calls 'update_dashboard' function
+# It updates the "data['dashboard']" with the informations from 'message' parameter
 def on_message(client, userdata, message):
     topic: str = message.topic
     value: str = message.payload.decode()
