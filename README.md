@@ -1,1 +1,7 @@
-# relat-rio-mosquitto-meca3-grupo-7
+# Relatório Mosquitto Meca3
+
+Grupo: Grupo 7
+Alunos: Erick Riquelme, Ysaak Costa
+
+#### Resumo
+Todos os registros estão 

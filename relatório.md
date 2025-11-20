@@ -86,6 +86,12 @@ mosquitto_passwd grupo9
 
 meca39
 ```
+Resumidamente, garantimos que o mosquito fosse executado no terminal considerando o arquivo padrão de configuração `mosquitto.conf`, reiniciamos o Mosquitto, definimos `passwd` como sendo o arquivo com os usuários e suas respectivas senhas e inserimos todas as credenciais dos grupos.
 
-Também nos certificamos de que os arquivos `mosquitto.log` e `data` existiam no caminho '*C:\Program Files\mosquitto*', e fizemos as devidas alterações na pasta.
+Também nos certificamos de que os arquivos `mosquitto.log`, `passwd` e `data` existiam no caminho '*C:\Program Files\mosquitto*', e fizemos as devidas alterações na pasta.
+Após tudo isso, fomos capazes de finalizar toda a configuração do nosso Broker MQTT.
 
+### Testes e Resultados
+Após finalmente termos concluído os passos cruciais, temos aqui o primeiro teste, que foi efetuado para verificar a integridade do Mosquitto:
+<img src="registros/WhatsApp Image 2025-11-12 at 10.48.54.jpeg">
+Traduzindo o que está acontecendo acima, abrimos dois termiais como administrador e usamos um para a função
