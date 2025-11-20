@@ -40,7 +40,7 @@ Depois foi só mover a cópia para a pasta do Mosquitto.
 
 Após esse evento, precisamos aprender um pouco sobre os comandos do Mosquitto no Prompt de Comando para terminar a primeira configuração.
 
-Como o Windows não identificou os programas `mosquitto`, `mosquitto_conf`, e todos os outros restantes como variáveis de ambiente (para operar no ambiente Windows), tivemos que ir no Menu Iniciar e pesquisar por 'Propriedades do Sistema'. Em tal janela, clicamos em 'Avançado > Variáveis de Ambiente...' e adicionamos o caminho '*C:\Program Files\mosquitto*' como sendo uma fonte extra de variáveis (que abriga os comandos que queremos) para executarmos a missão.
+Como o Windows não identificou os programas `mosquitto`, `mosquitto_pub`, `mosquitto_sub` e todos os outros restantes como variáveis de ambiente (para operar no ambiente Windows), tivemos que ir no Menu Iniciar e pesquisar por 'Propriedades do Sistema'. Em tal janela, clicamos em 'Avançado > Variáveis de Ambiente...' e adicionamos o caminho '*C:\Program Files\mosquitto*' como sendo uma fonte extra de variáveis (que abriga os comandos que queremos) para executarmos a missão.
 
 Terminando isso, prosseguimos para o terminal (mas dessa vez aberto novamente para carregar as alterações). Todas as linhas abaixo foram inseridas uma por vez no cmd:
 ```bash
