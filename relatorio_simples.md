@@ -87,3 +87,5 @@ mosquitto_passwd grupo9
 meca39
 ```
 
+Também nos certificamos de que os arquivos `mosquitto.log` e `data` existiam no caminho '*C:\Program Files\mosquitto*', e fizemos as devidas alterações na pasta.
+
