@@ -92,7 +92,7 @@ def update_db_thread():
     old_dict = {}
     while True:
         temporary_dict = dict(data['dashboard'])
-        # Skip to the next loop step if 'temporary_dict' is empty
+        # Skips to the next loop step if 'temporary_dict' is empty
         if not temporary_dict:
             time.sleep(0.1)
             continue
