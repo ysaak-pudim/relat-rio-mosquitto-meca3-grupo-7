@@ -1,12 +1,12 @@
 ### Parte inicial
-A partir do site https://mosquitto.org/download/ instalei o mosquitto.
+A partir do site https://mosquitto.org/download/ tentamos instalar a versão mais recente do Mosquitto.
 No entanto, aparecia um erro ao completar a instalação que apontava para a inexistência de um arquivo `.dll`.
 
 Para contornar esse erro, recorremos ao link https://mosquitto.org/files/binary/ disponibilizado pelo próprio site que continha as versões compatíveis com as configurações da máquina utilizada (Windows 7 32-bit).
 A instalação foi concluída com êxito, e pudemos fazer todo o restante do procedimento.
 
 ### Configurando o Mosquitto
-Para a configuração, primeiramente copiamos o arquivo `mosquitto.conf` da pasta do Mosquitto para um caminho não gerenciado pelo sistema.
+Para a configuração, primeiramente copiamos o arquivo `mosquitto.conf` do diretório '*C:\Program Files\mosquitto*' para um caminho não gerenciado pelo sistema.
 Depois, abrimos a cópia usando o Bloco de Notas do Windows substituímos seu conteúdo por todo o código a seguir:
 ```conf
 # Permite conexões de qualquer lugar na rede (0.0.0.0)
@@ -40,7 +40,7 @@ Depois foi só mover a cópia para a pasta do Mosquitto.
 
 Após esse evento, precisamos aprender um pouco sobre os comandos do Mosquitto no Prompt de Comando para terminar a primeira configuração.
 
-Como o Windows não identificou os programas `mosquitto`, `mosquitto_conf`, e todos os outros restantes como variáveis de ambiente (para operar no ambiente Windows), tivemos que ir no Menu Iniciar e pesquisar por 'Propriedades do Sistema'. Em tal janela, clicamos em 'Avançado > Variáveis de Ambiente...' e adicionamos o caminho *C:\Program Files\mosquitto* como sendo uma fonte extra de variáveis (que abriga os comandos que queremos) para executarmos a missão.
+Como o Windows não identificou os programas `mosquitto`, `mosquitto_conf`, e todos os outros restantes como variáveis de ambiente (para operar no ambiente Windows), tivemos que ir no Menu Iniciar e pesquisar por 'Propriedades do Sistema'. Em tal janela, clicamos em 'Avançado > Variáveis de Ambiente...' e adicionamos o caminho '*C:\Program Files\mosquitto*' como sendo uma fonte extra de variáveis (que abriga os comandos que queremos) para executarmos a missão.
 
 Terminando isso, prosseguimos para o terminal (mas dessa vez aberto novamente para carregar as alterações). Todas as linhas abaixo foram inseridas uma por vez no cmd:
 ```bash
@@ -93,5 +93,7 @@ Após tudo isso, fomos capazes de finalizar toda a configuração do nosso Broke
 
 ### Testes e Resultados
 Após finalmente termos concluído os passos cruciais, temos aqui o primeiro teste, que foi efetuado para verificar a integridade do Mosquitto:
+
 <img src="registros/WhatsApp Image 2025-11-12 at 10.48.54.jpeg">
-Traduzindo o que está acontecendo acima, abrimos dois termiais como administrador e usamos um para a função
+
+Traduzindo o que está acontecendo acima, abrimos dois termiais como administrador e usamos o primeiro para a função `mosquitto_pub` e o segundo para a função `mosquitto_sub`.
