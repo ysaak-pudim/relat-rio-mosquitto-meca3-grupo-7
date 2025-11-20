@@ -106,7 +106,7 @@ def update_db_thread():
             if not old_dict:
                 break
 
-            # Skip to the next 'for' loop step if the current topic isn't in 'old_dict', until this condition is true
+            # Skip to the next 'for' loop step if the current topic isn't in 'old_dict', until the 'topic in old_dict' condition is true
             if not (topic in old_dict):
                 continue
                 
