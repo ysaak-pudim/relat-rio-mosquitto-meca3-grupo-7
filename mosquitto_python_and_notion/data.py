@@ -35,5 +35,5 @@ data = {
             'prop': 'Status'
         }
     },
-    'dashboard': dict
+    'dashboard': {} #key: topic, value: numeric
 }
