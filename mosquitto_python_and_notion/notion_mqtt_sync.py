@@ -92,6 +92,7 @@ def update_db_thread():
     old_dict = {}
     while True:
         temporary_dict = dict(data['dashboard'])
+        # Skip to the next loop step if 'temporary_dict' is empty
         if not temporary_dict:
             time.sleep(0.1)
             continue
@@ -101,9 +102,11 @@ def update_db_thread():
             prop = data['topics'][topic]['prop']
             value = temporary_dict[topic]
 
+            # Goes out of the 'for' loop if 'old_dict' is empty, because next steps don't match
             if not old_dict:
                 break
 
+            # Skip to the next 'for' loop step if the current topic isn't in 'old_dict', until this condition is true
             if not (topic in old_dict):
                 continue
                 
@@ -117,6 +120,8 @@ def update_db_thread():
                     print(f'new value in {topic}: {value}')
                 else:
                     print(f'{value} was not published in {topic}.')
+                    # The line below is important because an value increment inside the range defined at 'range_value_dict[topic]'
+                    # would goes unnoticed by the code without that line
                     temporary_dict[topic] = old_dict[topic]
             
             else:
@@ -134,10 +139,11 @@ def on_message(client, userdata, message):
     if (topic in data['topics']) and value.isnumeric():
         data['dashboard'][topic] = float(value) if 'sensores' in topic else int(value)
 
+# 't' will run in paralel with the rest of the code
 t = threading.Thread(target=update_db_thread)
 t.start()
 
-# It always calls the function 'on_message' whenever something is published on the topics.
+# It always calls the function 'on_message' whenever something is published on the defined topics.
 subscribe.callback(
     callback=on_message,
     topics=[*data['topics']],
