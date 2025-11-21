@@ -99,3 +99,16 @@ Após finalmente termos concluído os passos cruciais, temos aqui o primeiro tes
 Traduzindo o que está acontecendo acima, abrimos dois termiais como administrador e usamos o primeiro para a função `mosquitto_pub` e o segundo para a função `mosquitto_sub`:
 - **`mosquitto_pub`**: publica no host local (na própria máquina que está rodando o broker) no tópico '*teste/tópico*' as mensagens de teste 'Olá, Mosquitto!' e 'fechar registro'.
 - **`mosquitto_sub`**: verifica no tópico em questão do host local se há alguma mensagem publicada. Caso isso ocorra, tal mensagem é exibida no terminal.
+
+E assim terminamos as partes fundamentais para que o projeto se mantesse de pé. Agora basta o usuário se conectar ao endereço IPv4 da máquina (que é facilmente encontrado nas configurações de rede) com suas credenciais.
+
+### Imprevistos
+- O arquivo que registra os *logs*, `mosquitto.log`, permaneceu vazio o tempo todo, e não conseguimos encontrar a solução para este problema. Tivemos a suspeita de que, pela versão instalada do Mosquitto ser de 2014, alguns componentes podem estar faltando ou simplesmente não se tinha naquela época.
+
+### Extras
+Como não ficamos satisfeitos por já ter concluído o papel atribuído ao nosso grupo, tivemos a ideia de criar um dashboard para dar um aroma mais elegante para o Mosquitto. Sabemos que a elaboração de tal dashboard não era obrigação de nosso gupo, mas não ligamos pra isso e botamos a mão na massa.
+
+O programa que utilizamos como cobaia para isso foi o [Notion](https://www.notion.com/pt), pois continha as principais ferramentas que precisávamos: bases de dados, exibição em gráficos, propriedades, valores etc.
+
+Criamos dois códigos em Python para executar nossa brincadeira:
+- `mqtt_pub.py`: este publica os dados dos sensores e motores em seus respectivos tópicos
