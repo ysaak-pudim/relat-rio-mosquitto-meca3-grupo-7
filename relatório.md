@@ -102,13 +102,17 @@ Traduzindo o que está acontecendo acima, abrimos dois termiais como administrad
 
 E assim terminamos as partes fundamentais para que o projeto se mantesse de pé. Agora basta o usuário se conectar ao endereço IPv4 da máquina (que é facilmente encontrado nas configurações de rede) com suas credenciais.
 
-### Imprevistos
+### Observações
 - O arquivo que registra os *logs*, `mosquitto.log`, permaneceu vazio o tempo todo, e não conseguimos encontrar a solução para este problema. Tivemos a suspeita de que, pela versão instalada do Mosquitto ser de 2014, alguns componentes podem estar faltando ou simplesmente não se tinha naquela época.
 
 ### Extras
-Como não ficamos satisfeitos por já ter concluído o papel atribuído ao nosso grupo, tivemos a ideia de criar um dashboard para dar um aroma mais elegante para o Mosquitto. Sabemos que a elaboração de tal dashboard não era obrigação de nosso gupo, mas não ligamos pra isso e botamos a mão na massa.
+Como não ficamos satisfeitos por já ter concluído o papel atribuído ao nosso grupo, quisemos ir além: tivemos a ideia de criar um dashboard para dar um aroma mais elegante para o Mosquitto. Sabemos que a elaboração de tal dashboard não era obrigação da nossa parte, mas não ligamos pra isso e botamos a mão na massa.
 
-O programa que utilizamos como cobaia para isso foi o [Notion](https://www.notion.com/pt), pois continha as principais ferramentas que precisávamos: bases de dados, exibição em gráficos, propriedades, valores etc.
+O programa que utilizamos como cobaia para essa ideia maluca foi o [Notion](https://www.notion.com/pt), pois continha as principais ferramentas que precisávamos: bases de dados, exibição em gráficos, propriedades, valores etc.
 
-Criamos dois códigos em Python para executar nossa brincadeira:
-- `mqtt_pub.py`: este publica os dados dos sensores e motores em seus respectivos tópicos
+Criamos dois scripts em Python para executar nossa brincadeira:
+- `mqtt_pub.py`: este publica os dados dos sensores e motores em seus respectivos tópicos. Nesse caso, tivemos que forçar uma "leitura", utilizando uma biblioteca que gera números pseudoaleatórios.
+- `notion_mqtt_sync.py`: esse arquivo foi divertido de se fazer. Cada alteração nova no valor de um tópico é registrada e inserida na página estruturada do Notion por meio da [API oficial do Notion](https://developers.notion.com/), que é nativamente em Javascript, mas a biblioteca [notion-client](https://pypi.org/project/notion-client/) resolveu nosso problema.
+
+Como esses scripts ainda estavam em fase de teste, deixaremos de lado os registros mais detalhados, mas segue abaixo um vídeo do dashboard funcionando:
+<video src="">

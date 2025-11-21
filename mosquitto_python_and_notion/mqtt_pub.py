@@ -64,20 +64,20 @@ mqtt_client = client.Client(callback_api_version=CallbackAPIVersion.VERSION2)
 mqtt_client.username_pw_set(username=data['user_mqtt']['username'], password=data['user_mqtt']['password'])
 mqtt_client.connect(host=data['host_mqtt'], port=1883)
 
+old_topic = ''
+
 while True:
     pub_dict = {}
     pub_list = []
     for i in range(1, 4):
         topic = random.choice(topics)
-        payload = random.choice(topic_data[topic])
-        pub_dict[f'{topic}'] = payload
+        if topic != old_topic:
+            payload = random.choice(topic_data[topic])
+            pub_dict[f'{topic}'] = payload
+            old_topic = topic
     
     for k in pub_dict:
-        pub_list.append((k, pub_dict[k]))
-
-    publish.multiple(pub_list)
-
-    for (topic, payload) in pub_list:
+        publish.single(topic=k, payload=pub_dict[k], keepalive=0)
         print(f'published {payload} in {topic}')
-    
+
     time.sleep(1)

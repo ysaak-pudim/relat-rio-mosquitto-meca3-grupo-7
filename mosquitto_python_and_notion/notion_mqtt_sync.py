@@ -1,5 +1,5 @@
-import numbers
 import threading, time
+from turtle import up
 from paho.mqtt import client, subscribe
 import notion_client
 from paho.mqtt.enums import CallbackAPIVersion
@@ -60,6 +60,28 @@ mqtt_client.connect(host=data['host_mqtt'], port=1883)
 # Connecting to the Notion API
 notion = notion_client.Client(auth=data['notion_token'])
 
+notion_requests = []
+
+def notion_updater_thread():
+    '''
+    This function processes the Notion update requests stored in 'notion_requests' list.
+    '''
+    while True:
+        if notion_requests:
+            page_id, prop, value = notion_requests.pop(0)
+            try:
+                notion.pages.update(
+                    page_id,
+                    properties={
+                        prop: value
+                    }
+                )
+            except Exception as e:
+                print(f'Error updating Notion page {page_id}: {e}')
+        
+        time.sleep(0.1)
+
+
 def update_dashboard(page_id, prop: str, value):
     '''
     This function makes updates in our dashboard.
@@ -78,18 +100,17 @@ def update_dashboard(page_id, prop: str, value):
     elif prop == 'Status':
         value = {'status': {'name': keys[f'{value}']}}
     
-    notion.pages.update(
-        page_id,
-        properties={
-            prop: value
-        }
-    )
+    notion_requests.append((page_id, prop, value))
 
 def update_db_thread():
     '''
     This function updates automatically without sync with 'on_message' events
     '''
     old_dict = {}
+    del_topic_list = []
+
+    time.sleep(5)  # Waits 5 seconds to let 'on_message' fill 'data['dashboard']' initially
+
     while True:
         temporary_dict = dict(data['dashboard'])
         # Skips to the next loop step if 'temporary_dict' is empty
@@ -108,27 +129,41 @@ def update_db_thread():
 
             # Skip to the next 'for' loop step if the current topic isn't in 'old_dict', until the 'topic in old_dict' condition is true
             if not (topic in old_dict):
-                continue
-                
-            if (prop == 'Status') and (temporary_dict[topic] != old_dict[topic]):
                 update_dashboard(page_id, prop, value)
                 print(f'new value in {topic}: {value}')
+                old_dict[topic] = value
+                continue
+                
+            if (prop == 'Status'):
+                if (temporary_dict[topic] != old_dict[topic]):
+                    update_dashboard(page_id, prop, value)
+                    print(f'new value in {topic}: {value}')
+                
+                else:
+                    continue
             
             elif (prop == 'Valor'):
                 if abs(temporary_dict[topic] - old_dict[topic]) >= range_value_dict[topic]:
                     update_dashboard(page_id, prop, value)
                     print(f'new value in {topic}: {value}')
+                
                 else:
-                    print(f'{value} was not published in {topic}.')
                     # The line below is important because an value increment inside the range defined at 'range_value_dict[topic]'
                     # would goes unnoticed by the code without that line
                     temporary_dict[topic] = old_dict[topic]
             
             else:
-                print(f'{value} was not published in {topic}.')
+                print(f'{value} was not picked from {topic}.')
+                del_topic_list.append(topic)
+                continue
         
+        if del_topic_list:
+            for topic in del_topic_list:
+                del data['dashboard'][topic]
+            del_topic_list.clear()
+
         time.sleep(0.1)
-            
+        
         old_dict = dict(temporary_dict)
 
 # It updates the "data['dashboard']" with the informations from 'message' parameter
@@ -136,12 +171,15 @@ def on_message(client, userdata, message):
     topic: str = message.topic
     value: str = message.payload.decode()
 
-    if (topic in data['topics']) and value.isnumeric():
+    if (topic in data['topics']) and (value.isnumeric() or value.isdecimal()):
         data['dashboard'][topic] = float(value) if 'sensores' in topic else int(value)
 
 # 't' will run in paralel with the rest of the code
-t = threading.Thread(target=update_db_thread)
-t.start()
+t1 = threading.Thread(target=update_db_thread)
+t1.start()
+
+t2 = threading.Thread(target=notion_updater_thread)
+t2.start()
 
 # It always calls the function 'on_message' whenever something is published on the defined topics.
 subscribe.callback(
