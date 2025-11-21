@@ -94,14 +94,7 @@ Após tudo isso, fomos capazes de finalizar toda a configuração do nosso Broke
 ### Testes e Resultados
 Após finalmente termos concluído os passos cruciais, temos aqui o primeiro teste, que foi efetuado para verificar a integridade do Mosquitto:
 
-<html>
-  <head>
-    <link rel="stylesheet" href="style.css">
-  </head>
-  <body>
-    <img src="registros/WhatsApp Image 2025-11-12 at 10.48.54.jpeg">
-  </body>
-</html>
+<img src="registros/WhatsApp Image 2025-11-12 at 10.48.54.jpeg">
 
 Traduzindo o que está acontecendo acima, abrimos dois termiais como administrador e usamos o primeiro para a função `mosquitto_pub` e o segundo para a função `mosquitto_sub`:
 - **`mosquitto_pub`**: publica no host local (na própria máquina que está rodando o broker) no tópico '*teste/tópico*' as mensagens de teste 'Olá, Mosquitto!' e 'fechar registro'.
