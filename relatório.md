@@ -115,6 +115,6 @@ Criamos dois scripts em Python para executar nossa brincadeira:
 - `notion_mqtt_sync.py`: esse arquivo foi divertido de se fazer. Cada alteração nova no valor de um tópico é registrada e inserida na página estruturada do Notion por meio da [API oficial do Notion](https://developers.notion.com/), que é nativamente em Javascript, mas a biblioteca [notion-client](https://pypi.org/project/notion-client/) resolveu nosso problema.
 
 Como esses scripts ainda estavam em fase de teste, deixaremos de lado os registros mais detalhados, mas segue abaixo um vídeo do dashboard funcionando:
-<video src="registros/2025-11-21 20-50-45.mkv">
+[registros/2025-11-21 20-50-45.mkv](registros/2025-11-21%2020-50-45.mkv)
 
 Resumidamente foi esse o nosso relatório.
