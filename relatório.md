@@ -114,7 +114,7 @@ Criamos dois scripts em Python para executar nossa brincadeira:
 - `mqtt_pub.py`: este publica os dados dos sensores e motores em seus respectivos tópicos. Nesse caso, tivemos que forçar uma "leitura", utilizando uma biblioteca que gera números pseudoaleatórios.
 - `notion_mqtt_sync.py`: esse arquivo foi divertido de se fazer. Cada alteração nova no valor de um tópico é registrada e inserida na página estruturada do Notion por meio da [API oficial do Notion](https://developers.notion.com/), que é nativamente em Javascript, mas a biblioteca [notion-client](https://pypi.org/project/notion-client/) resolveu nosso problema.
 
-Como esses scripts ainda estavam em fase de teste, deixaremos de lado os registros mais detalhados, mas segue abaixo um vídeo do dashboard funcionando:
+Como esses scripts ainda estavam em fase de teste, deixamos de lado os registros mais detalhados, mas segue abaixo um vídeo do dashboard funcionando:
 
 [2025-11-21 20-50-45.mkv](registros/2025-11-21%2020-50-45.mkv)
 
