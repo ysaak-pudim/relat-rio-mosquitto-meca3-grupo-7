@@ -97,7 +97,7 @@ Após finalmente termos concluído os passos cruciais, temos aqui o primeiro tes
 <img src="registros/WhatsApp Image 2025-11-12 at 10.48.54.jpeg">
 
 Traduzindo o que está acontecendo acima, abrimos dois termiais como administrador e usamos o primeiro para a função `mosquitto_pub` e o segundo para a função `mosquitto_sub`:
-- **`mosquitto_pub`**: publica no host local (na própria máquina que está rodando o broker) no tópico '*teste/tópico*' as mensagens de teste 'Olá, Mosquitto!' e 'fechar registro'.
+- **`mosquitto_pub`**: publica no host local (na própria máquina que está rodando o broker), no tópico '*teste/tópico*', as mensagens de teste 'Olá, Mosquitto!' e 'fechar registro'.
 - **`mosquitto_sub`**: verifica no tópico em questão do host local se há alguma mensagem publicada. Caso isso ocorra, tal mensagem é exibida no terminal.
 
 E assim terminamos as partes fundamentais para que o projeto se mantesse de pé. Agora basta o usuário se conectar ao endereço IPv4 da máquina (que é facilmente encontrado nas configurações de rede) com suas credenciais.
