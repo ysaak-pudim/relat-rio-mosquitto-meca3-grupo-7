@@ -7,7 +7,7 @@ A instalação foi concluída com êxito, e pudemos fazer todo o restante do pro
 
 ### Configurando o Mosquitto
 Para a configuração, primeiramente copiamos o arquivo `mosquitto.conf` do diretório '*C:\Program Files\mosquitto*' para um caminho não gerenciado pelo sistema.
-Depois, abrimos a cópia usando o Bloco de Notas do Windows substituímos seu conteúdo por todo o código a seguir:
+Depois, abrimos a cópia usando o Bloco de Notas do Windows e substituímos seu conteúdo por todo o código a seguir:
 ```conf
 # Permite conexões de qualquer lugar na rede (0.0.0.0)
 listener 1883 0.0.0.0
